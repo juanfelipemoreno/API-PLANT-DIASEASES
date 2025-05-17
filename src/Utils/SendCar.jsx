@@ -1,4 +1,16 @@
-let carList = [];
+const STORAGE_KEY = "carList";
+
+// Función para obtener desde localStorage
+function loadFromStorage() {
+  const stored = localStorage.getItem(STORAGE_KEY);
+  return stored ? JSON.parse(stored) : [];
+}
+
+let carList = loadFromStorage();
+
+function saveToStorage() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(carList));
+}
 
 export function addCarList(floor) {
   const existing = carList.find(item => item.common_name === floor.common_name);
@@ -7,16 +19,19 @@ export function addCarList(floor) {
   } else {
     carList.push({ ...floor, quantity: 1 });
   }
+  saveToStorage();
 }
 
 export function getCarList() {
-    return carList;
+  return carList;
 }
 
 export function clearCarList() {
-    carList = []
+  carList = [];
+  saveToStorage();
 }
 
 export function removeFromCar(id) {
-    carList = carList.filter(floor => floor.id !== id);
- }
+  carList = carList.filter(floor => floor.id !== id);
+  saveToStorage();
+}
