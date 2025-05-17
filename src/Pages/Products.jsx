@@ -78,6 +78,7 @@ const Products = () => {
                                         image={data.default_image != null ? data.default_image.original_url : ""}
                                         title={data.common_name}
                                         description= { descriptions[index].description}
+                                        price={ descriptions[index].price_cop}
                                     />
                                 </Col> : 
                                 null
