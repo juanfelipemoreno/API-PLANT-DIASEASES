@@ -37,7 +37,7 @@ function CardComp({ image = 'holder.js/100px180', title = 'img', description = '
                 <Card.Title><b>{title}</b></Card.Title>
                 <Card.Text className="truncate-text">{description} </Card.Text>
                  <Card.Text className="truncate-text">Precio: ${price} </Card.Text>
-                <Button variant="primary" onClick={handleDetail}>
+                <Button variant="primary" onClick={handleDetail} className="me-2">
                     Detalles
                 </Button>
                 <Button variant="primary" onClick={handleAddFloorToList}>

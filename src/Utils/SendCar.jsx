@@ -31,7 +31,7 @@ export function clearCarList() {
   saveToStorage();
 }
 
-export function removeFromCar(id) {
-  carList = carList.filter(floor => floor.id !== id);
+export function removeFromCar(floorShop) {
+  carList = carList.filter(floor => floor.common_name !== floorShop.common_name);
   saveToStorage();
 }

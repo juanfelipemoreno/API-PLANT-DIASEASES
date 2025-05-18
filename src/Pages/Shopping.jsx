@@ -1,6 +1,6 @@
-import { Row, Card, Col, Container, Button } from 'react-bootstrap';
+import { Row, Card, Col, Container, Button, Alert } from 'react-bootstrap';
 import NavbarComp from "../Components/Navbar/Navbar";
-import { addCarList, getCarList, clearCarList } from "../Utils/SendCar";
+import { addCarList, getCarList, clearCarList, removeFromCar } from "../Utils/SendCar";
 import { useState, useEffect } from 'react';
 
 const Shopping = ({ list }) => {
@@ -19,37 +19,61 @@ const Shopping = ({ list }) => {
             setTotal(0)
         }
     })
+    const handleDelete = (floorShop) =>  {
+        removeFromCar(floorShop);
+        alert('La platana fue removida del carrito');
+        setShop(shop.filter(floor => floor.common_name !== floorShop.common_name));
+    }
     return (
-        <>
-            <NavbarComp />
-            <Container>
-                    <Col sm="8" className="container">
-                        {
-                            shop.length > 0 ? shop.map((data, index) => (
-                                <Card style={{ width: '18rem', margin: '1rem' }}>
-                                    <Card.Body>
-                                        <Card.Title>{data.common_name}</Card.Title>
-                                        <Card.Text>
-                                            <strong>Precio:</strong> ${data.price} <br />
-                                            <strong>Cantidad:</strong> {data.quantity}
-                                        </Card.Text>
-                                        <Button variant="danger">
-                                            Eliminar
-                                        </Button>
-                                    </Card.Body>
-                                </Card>
+<>
+  <NavbarComp />
+  <Container className="my-4">
+    <h3 className="mb-4">Carrito de Compras</h3>
 
-                            )) : <Container>
-                                <p>No tienes nada para el carrito</p>
-                            </Container>
-                        }
-                    </Col>
-                    <Container sm="8">
-                        {total != 0 ? <p>Total: {total}</p> : null}
-                        <Button onClick={handleClearShop}>Pagar</Button>
-                    </Container>
-            </Container>
-        </>
+  {shop.length > 0 ? (
+  <div className="cart-list">
+    {shop.map((data, index) => (
+      <div
+        key={index}
+        className="cart-item d-flex align-items-center justify-content-between p-3 mb-3 border rounded shadow-sm"
+      >
+        <div className="d-flex align-items-center" style={{ gap: '1rem', flex: 1 }}>
+          <img
+            src={data.image || 'https://via.placeholder.com/100x100?text=Sin+imagen'}
+            alt={data.common_name}
+            style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
+          />
+          <div className="d-flex flex-column">
+            <strong>{data.common_name}</strong>
+            <span>Precio: ${data.price}</span>
+            <span>Cantidad: {data.quantity}</span>
+          </div>
+        </div>
+
+        <Button variant="outline-danger" onClick={() => handleDelete(data)}>Eliminar</Button>
+      </div>
+    ))}
+  </div>
+) : (
+  <p className="text-muted">No tienes nada en el carrito.</p>
+)}
+
+
+    <hr className="my-4" />
+
+    <div className="d-flex justify-content-between align-items-center">
+      <h5>Total: ${total}</h5>
+      <Button 
+        variant="primary" 
+        onClick={handleClearShop} 
+        disabled={total === 0}
+      >
+        Pagar
+      </Button>
+    </div>
+  </Container>
+</>
+
 
     )
 }

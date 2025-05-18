@@ -52,22 +52,9 @@ const Products = () => {
             {error.message ? (<AlertMessage type={error.type} message={error.message} />) : (<div></div>)}
             {loading ? (<div className="text-center"><LoadComp /></div>) : (
                 <>
-                    <Container>
+                    <Container className="my-4">
                         <Row>
-                            <Col sm="8" className="container">
-                                <Form className="m-3 col-xs-6">
-                                    <Form.Group as={Row} className="mb-3">
-                                        <Col sm="6">
-                                            <Form.Control type="text" placeholder="Buscar" />
-                                        </Col>
-                                        <Col sm="5">
-                                            <Button variant="primary" onClick={search}>
-                                                Buscar
-                                            </Button>
-                                        </Col>
-                                    </Form.Group>
-                                </Form>
-                            </Col>
+                            <h3 className="mb-4">Plantas</h3>
                         </Row>
 
                         <Row xs={1} md={4} className="g-4">
