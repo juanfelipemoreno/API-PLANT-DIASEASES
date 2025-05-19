@@ -3,32 +3,26 @@ import NavbarComp from "../Components/Navbar/Navbar";
 import { getDataApi } from '../Utils/getDataApi';
 import { AlertMessage } from '../Components/ErrorComp'
 import CardComp from "../Components/CardComp";
-import {Row,Form,Col,Container,Button} from 'react-bootstrap';
+import { Row, Form, Col, Container, Button } from 'react-bootstrap';
 import LoadComp from "../Components/LoadComp";
+import {descriptions} from '../constants/constants';
 
 const Products = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState({ message: '', type: '' });
 
-    const [astronomy, setAstronomy] = useState(null);
-    const [endpoint, setEndpoint] = useState('apod');
+    const [floors, setFloors] = useState(null);
 
-    const [count, setCount] = useState(10);
-
+    const token = "sk-WREH68268bcbdc5f710454"
     const search = (e) => {
-        console.log(count)
         getDataApi({
-            url: 'https://api.nasa.gov/planetary/',
-            endpoint: endpoint,
-            params: { 
-                api_key: 'Vqk0sTiib2O8zY10OPJC1KuLmmi2xO3CzxddGAe2',
-                count : count
-            }
+            url: `https://perenual.com/api/v2/species-list?key=${token}&hardiness=1-13`,
         }).then(response => {
             setError('');
-            setAstronomy(response);
-            
+            console.log('Datos',response.data)
+            setFloors(response.data);
+
         }).catch(error => {
             setLoading(false);
             setError({ message: error.message, type: 'danger' });
@@ -38,65 +32,47 @@ const Products = () => {
 
     useEffect(() => {
         setLoading(true);
-        setAstronomy('');
+        setFloors('');
         search();
+        console.log("Descripciones disponibles:", descriptions);
+        console.log("Descripcion 1:", descriptions[1].description);
+
         const timer = setTimeout(() => {
-            
+
             setLoading(false);
         }, 1000);
 
         return () => clearTimeout(timer); // Limpiar el temporizador
-        
+
     }, []);
 
     return (
         <>
             <NavbarComp />
-            { error.message ? (<AlertMessage type={error.type} message={error.message} />) : (<div></div>)}
-            { loading ? (<div className="text-center"><LoadComp/></div>) : (
+            {error.message ? (<AlertMessage type={error.type} message={error.message} />) : (<div></div>)}
+            {loading ? (<div className="text-center"><LoadComp /></div>) : (
                 <>
-                <Container>
-                    <Row>
-                        <Col sm="8" className="container">
-                            <Form className="m-3 col-xs-6">
-                                <Form.Group as={Row} className="mb-3" controlId="formPlaintextPassword">
-                                    <Col sm="5">
-                                        <Form.Control type="text" placeholder="Buscar" />
-                                    </Col>
-                                    <Col sm="4">
-                                        <Form.Control type="number" placeholder="Cantidad" 
-                                            onChange={(e) =>
-                                                Number(e.target.value) > 0 ? ( 
-                                                    setCount(Number(e.target.value))
-                                                ) : setCount(10)
-                                            }/>
-                                    </Col>
-                                    <Col sm="1">
-                                        <Button variant="primary" onClick={search}>
-                                            Buscar
-                                        </Button>
-                                    </Col>
-                                </Form.Group>
-                            </Form>
-                        </Col>
-                    </Row>
-                    
-                    <Row xs={1} md={4} className="g-4">
-                        {Array.from({ length: 1 }).map((_, idx) => (
-                            Array.isArray(astronomy) && astronomy.length > 0 && astronomy.map((data, index)=>(
-                                data.media_type == 'image' && (
-                                    <Col key={index} md={4} className="custom-col">
-                                        <CardComp 
-                                            image = {data.hdurl}
-                                            title = {data.title}
-                                            description = {data.explanation}
-                                        />
-                                    </Col>   
-                                )
-                            ))
-                        ))}    
-                    </Row>
-                </Container>
+                    <Container className="my-4">
+                        <Row>
+                            <h3 className="mb-4">Plantas</h3>
+                        </Row>
+
+                        <Row xs={1} md={4} className="g-4">
+                            {floors.length > 0 ? floors.map((data, index) => (
+                                
+                              data.default_image != null ? <Col key={index} md={4} className="custom-col">
+                                    <CardComp
+                                        image={data.default_image != null ? data.default_image.original_url : ""}
+                                        title={data.common_name}
+                                        description= { descriptions[index].description}
+                                        price={ descriptions[index].price_cop}
+                                    />
+                                </Col> : 
+                                null
+                            )) 
+                                : <Container></Container>}
+                        </Row>
+                    </Container>
                 </>
             )}
         </>
