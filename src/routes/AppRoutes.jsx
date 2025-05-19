@@ -1,9 +1,11 @@
 import { useContext, React} from 'react';
 import { BrowserRouter, Route, Routes, Navigate} from "react-router-dom";
 import Home from '../Pages/Home';
+
 import Product from '../Pages/Products';
 import Shopping from '../Pages/Shopping';
 import { getCarList } from '../Utils/SendCar';
+
 
 
 export default function AppRoutes() {
