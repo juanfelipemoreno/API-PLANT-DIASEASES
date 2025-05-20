@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Text } from 'react-bootstrap';
 import iconPlanta from '../../assets/planta.png'
 
 const NavbarComp = () => {
 
+  const navigate = useNavigate()
   const [modeBlack, setModeBlack] = useState('dark');
 
   const handleMode = (e) => {
@@ -14,9 +16,9 @@ const NavbarComp = () => {
   };
 
   return (
-    <Navbar bg={modeBlack} variant={modeBlack} expand="lg" >
+    <Navbar bg={modeBlack} variant={modeBlack} expand="lg" fixed='top' >
       <Container fluid>
-        <Navbar.Brand href="#">
+        <Navbar.Brand onClick={() => navigate('/')}>
           <img
             alt=""
             src={iconPlanta}
@@ -32,9 +34,9 @@ const NavbarComp = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link href="/">Inicio</Nav.Link>
-            <Nav.Link href="/products">Plantas</Nav.Link>
-            <Nav.Link href="/identifyPlant">Identificar Planta</Nav.Link>
+            <Nav.Link onClick={() => navigate('/')}>Inicio</Nav.Link>
+            <Nav.Link onClick={() => navigate('/Products')}>Plantas</Nav.Link>
+            <Nav.Link onClick={() => navigate('/IdentifyPlant')}>Identificar Planta</Nav.Link>
           </Nav>
           <Nav className="ms-auto">
             <Nav.Link href="/shooping">Carrito</Nav.Link>
