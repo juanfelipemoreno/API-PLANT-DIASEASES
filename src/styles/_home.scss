@@ -1,3 +1,4 @@
+@use './_mixins' as mix;
 
 .welcome {
     position: relative;
@@ -52,24 +53,7 @@
 
         .welcome-buttons {
             .btn {
-                padding: 12px 24px;
-                margin: 10px;
-                font-size: 1.4rem;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                background-color: #388e3c;
-                color: white;
-                transition: background-color 0.3s ease;
-            }
-            .btn:hover {
-                background-color: #2e7d32;
-            }
-            .secondary {
-                background-color: #81c784;
-                &:hover{
-                    background-color: #66bb6a;
-                }
+                @include mix.btn-style;
             }
         }
     }

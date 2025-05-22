@@ -1,5 +1,5 @@
 import { useState, useEffect, } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavbarComp from "../Components/Navbar/Navbar";
 
 import {Row,Form,Col,Container,Button} from 'react-bootstrap';
@@ -20,10 +20,10 @@ const Home = () => {
                         <p>Tu tienda de confianza para plantas y soluciones inteligentes para cuidarlas.</p>
                     </header>
                     <div className="welcome-buttons">
-                        <button className="btn" onClick={() => navigate('/Products')}>
+                        <button className="btn-t" onClick={() => navigate('/Products')}>
                         🛒 Explorar Tienda
                         </button>
-                        <button className="btn secondary" onClick={() => navigate('/IdentifyPlant')}>
+                        <button className="btn-t" onClick={() => navigate('/IdentifyPlant')}>
                         🔍 Identificar Problemas en tu Planta
                         </button>
                     </div>   
