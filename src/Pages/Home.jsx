@@ -1,11 +1,16 @@
+
 import { useState, useEffect, } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import NavbarComp from "../Components/Navbar/Navbar";
+import {useNavigate } from 'react-router-dom'
 
-import {Row,Form,Col,Container,Button} from 'react-bootstrap';
 
 
 const Home = () => {
+    const navigate = useNavigate()
+    const handleNavigationProduct = () =>  {
+        navigate("/Products")
+    }
 
     const navigate = useNavigate();
 
@@ -21,6 +26,7 @@ const Home = () => {
                     </header>
                     <div className="welcome-buttons">
                         <button className="btn-t" onClick={() => navigate('/Products')}>
+                        <button className="btn" onClick={() => handleNavigationProduct()}>
                         🛒 Explorar Tienda
                         </button>
                         <button className="btn-t" onClick={() => navigate('/IdentifyPlant')}>
