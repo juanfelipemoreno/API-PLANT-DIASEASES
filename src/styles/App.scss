@@ -1,7 +1,9 @@
 @use './custom' as vars;
 @use './mixins' as mix;
+@use './home';
 @import 'bootstrap/scss/bootstrap';
-@import './home';
+
+
 
 * {
     margin: 0;
@@ -14,7 +16,7 @@
     margin: 0 auto;
     text-align: center;
     width: 100%;
-    height: 100vh;
+    
 }
 
 .truncate-text {
@@ -33,6 +35,123 @@
 
 .imgDetailCard{
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3); 
+}
+
+
+.container-plant{
+    position: relative;
+    top: 56px;
+    margin: 1rem auto;
+    @include mix.center-div;
+    .plant-box{
+        background-color: #98bc3c;
+        padding: 2rem;
+        min-height: 28rem;
+        @include mix.center-div;
+        max-width: 63rem;
+        border-radius: 2rem;
+    }
+    .button-import{
+        position: relative;
+        display: inline-flex;
+        min-width: 17rem;
+        min-height: 2.5rem;
+        border: 4px solid cornsilk;
+        border-radius: 7px;
+        background-color: #5678EF;
+        align-items: center;
+        justify-content: center;
+        user-select: none;
+        cursor: pointer;
+
+        &::before {
+            content: 'Seleccionar Imagen';
+            flex: 1;
+            text-align: center;
+            max-width: fit-content
+        }
+        &::after{
+            content: '';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-image: var(--icon-url);
+            background-repeat: no-repeat;
+            background-position: right center;
+            background-size: 20px 20px;
+            margin-left: 0.5rem;
+        }
+        input[type="file"]{
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+            cursor: pointer;
+        }
+        &:hover {
+            background-color: #324eb3; // nuevo color al hacer hover
+            color: #e0e0e0;
+        }
+    }
+    .container-file{
+        @include mix.center-div;
+        .container-img{
+            min-width: 15rem;
+            min-height: 15rem;
+            position: relative;
+            padding: 1rem;
+            max-width: 15rem;
+            .img{
+                overflow: hidden;
+                max-width: 100%;
+                max-height: 13rem;
+            }
+            img{
+                max-width: 100%;
+                max-height: 100%;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                display: block;
+            }
+            .close{
+                top:0;
+                right: 0;
+                position: absolute;
+                padding: 8px;
+                cursor: pointer;
+                transition: transform 0.2s ease-in-out;
+                &:hover{
+                    transform: scale(1.3);
+                }
+            }
+            &:hover{
+                box-shadow: -1px 1px 7px black inset;
+                border-radius: 10px;
+            }
+        }
+        .container-upload{
+            width: 13rem;
+            .btn-t{
+                @include mix.btn-style(null,1rem);
+            }
+        }
+    }
+    
+}
+
+.none{
+    display: none;
+}
+
+.block{
+    display: block;
+}
+
+.btn-t{
+    @include mix.btn-style;
 }
 
 

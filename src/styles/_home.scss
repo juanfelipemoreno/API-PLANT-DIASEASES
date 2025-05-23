@@ -1,3 +1,4 @@
+@use './_mixins' as mix;
 
 .welcome {
     position: relative;
@@ -7,15 +8,15 @@
 
     .background-layer {
         position: absolute;
-        top: 0;
-        left: 0;
+        top: -250px;
+        left: -130px;
         width: 100%;
-        height: 100vh;
+        height: 200vh;
         background: url('../assets/flor-de-cerezo.png') no-repeat center center;
         background-size: cover;
         opacity: 0.5;
-        filter: blur(3px);
-        transform: scale(1.5) rotate(-23deg);
+        filter: blur(4px);
+        transform: scale(1.1) rotate(-14deg);
         z-index: 0;
     }
     
@@ -33,11 +34,11 @@
 
         .welcome-header {
             h1 {
-                font-size: 2.5rem;
+                font-size: 4.5rem;
                 color: #2e7d32;
             }
             p {
-                font-size: 1.2rem;
+                font-size: 1.7rem;
                 margin: 10px 0 30px;
             }
         }
@@ -52,24 +53,7 @@
 
         .welcome-buttons {
             .btn {
-                padding: 12px 24px;
-                margin: 10px;
-                font-size: 1rem;
-                border: none;
-                border-radius: 8px;
-                cursor: pointer;
-                background-color: #388e3c;
-                color: white;
-                transition: background-color 0.3s ease;
-            }
-            .btn:hover {
-                background-color: #2e7d32;
-            }
-            .secondary {
-                background-color: #81c784;
-                &:hover{
-                    background-color: #66bb6a;
-                }
+                @include mix.btn-style;
             }
         }
     }

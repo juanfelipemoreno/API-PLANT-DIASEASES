@@ -18,6 +18,7 @@ const Products = () => {
     const search = (e) => {
         getDataApi({
             url: `https://perenual.com/api/v2/species-list?key=${token}&hardiness=1-13`,
+            method: 'GET'
         }).then(response => {
             setError('');
             console.log('Datos',response.data)

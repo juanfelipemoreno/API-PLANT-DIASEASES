@@ -1,3 +1,6 @@
+
+import { useState, useEffect, } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import NavbarComp from "../Components/Navbar/Navbar";
 import {useNavigate } from 'react-router-dom'
 
@@ -8,6 +11,8 @@ const Home = () => {
     const handleNavigationProduct = () =>  {
         navigate("/Products")
     }
+
+    const navigate = useNavigate();
 
     return (
         <>
@@ -20,10 +25,11 @@ const Home = () => {
                         <p>Tu tienda de confianza para plantas y soluciones inteligentes para cuidarlas.</p>
                     </header>
                     <div className="welcome-buttons">
+                        <button className="btn-t" onClick={() => navigate('/Products')}>
                         <button className="btn" onClick={() => handleNavigationProduct()}>
                         🛒 Explorar Tienda
                         </button>
-                        <button className="btn secondary" onClick={() => alert('Ir al detector de problemas')}>
+                        <button className="btn-t" onClick={() => navigate('/IdentifyPlant')}>
                         🔍 Identificar Problemas en tu Planta
                         </button>
                     </div>   

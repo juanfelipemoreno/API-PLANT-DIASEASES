@@ -5,6 +5,7 @@ import Home from '../Pages/Home';
 import Product from '../Pages/Products';
 import Shopping from '../Pages/Shopping';
 import { getCarList } from '../Utils/SendCar';
+import IdentifyPlant from '../Pages/IdentifyPlant';
 
 
 
@@ -16,6 +17,7 @@ export default function AppRoutes() {
                 <Route path="/Home" element={<Home/>}  />
                 <Route path='/Products' element={<Product />} />
                 <Route path='/shooping' element={<Shopping list={getCarList()} />} />
+                <Route path='/IdentifyPlant' element={<IdentifyPlant/>} />
                 <Route path="*" element={<div><h1>404 NOT FOUND</h1></div>} />
             </Routes>
         </BrowserRouter>

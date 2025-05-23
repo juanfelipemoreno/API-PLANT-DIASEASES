@@ -1,0 +1,19 @@
+@mixin btn-style($bg-color: #388e3c, $font-size: 1.4rem, $color: white,$hover-color: darken(#388e3c, 10%)) {
+  padding: 12px 24px;
+  margin: 10px;
+  font-size: $font-size;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: $bg-color;
+  color: $color;
+  transition: background-color 0.3s ease;
+  &:hover {
+        background-color: $hover-color;
+    }
+}
+
+@mixin center-div{
+    display: grid;
+    place-items: center;
+}
