@@ -42,7 +42,7 @@ const decreaseQuantity = (item) => {
   );
   setShop(updated);
   const changedItem = updated.find(floor => floor.common_name === item.common_name);
-  updateCarListItem(changedItem); // ✅ evita duplicados
+  updateCarListItem(changedItem);
 };
 
   
