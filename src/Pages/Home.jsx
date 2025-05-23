@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import NavbarComp from "../Components/Navbar/Navbar";
 
-import {Row,Form,Col,Container,Button} from 'react-bootstrap';
 
 
 const Home = () => {

@@ -1,20 +1,37 @@
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { ButtonGroup } from 'react-bootstrap';
 import { addCarList, getCarList } from '../Utils/SendCar';
 
 export default function CardDetailComp({ show, onHide, image, title, description, price }) {
+    const [quantity, setQuantity] = useState(1);
+    const [modalShow, setModalShow] = useState(false);
 
-   const handleAddFloorToList = () => {
-          const floor = {
-              "common_name": title,
-              "image": image,
-              "description": description,
-              "price": price
-          }
-          addCarList(floor);
-          alert('!Planta añadida al carrito exitosamente!')
-          console.log("Productos añadidos", getCarList())
-      }
+    const handleDetail = () => {
+        setModalShow(true);
+    };
+
+    const handleAddFloorToList = () => {
+        const floor = {
+            "common_name": title,
+            "image": image,
+            "description": description,
+            "price": price,
+            "quantity": quantity
+        };
+        addCarList(floor);
+        alert('¡Planta añadida al carrito exitosamente!');
+        console.log("Productos añadidos", getCarList());
+    };
+
+    const increaseQuantity = () => {
+        setQuantity(prev => prev + 1);
+    };
+
+    const decreaseQuantity = () => {
+        setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+    };
 
 
   return (
@@ -37,9 +54,19 @@ export default function CardDetailComp({ show, onHide, image, title, description
               style={{ maxWidth: '100%', maxHeight: '400px', objectFit: 'contain' }}
             />
           </div>
+            
           <div className="col-md-6">
-            <p>{description}</p>
-             <p>Precio: ${price}</p>
+            <p className="mb-3">{description}</p>
+             
+            <p className="mb-3">Precio: ${price}</p>
+            <div className="d-flex align-items-center">
+                    <span className="me-2">Cantidad:</span>
+                    <ButtonGroup>
+                        <Button variant="outline-secondary" onClick={decreaseQuantity}>-</Button>
+                        <Button variant="light" disabled style={{ width: '50px' }}>{quantity}</Button>
+                        <Button variant="outline-secondary" onClick={increaseQuantity}>+</Button>
+                    </ButtonGroup>
+              </div>
           </div>
         </div>
       </div>

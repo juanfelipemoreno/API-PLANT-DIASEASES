@@ -15,9 +15,9 @@ function saveToStorage() {
 export function addCarList(floor) {
   const existing = carList.find(item => item.common_name === floor.common_name);
   if (existing) {
-    existing.quantity += 1;
+    existing.quantity += floor.quantity;
   } else {
-    carList.push({ ...floor, quantity: 1 });
+    carList.push({ ...floor});
   }
   saveToStorage();
 }
