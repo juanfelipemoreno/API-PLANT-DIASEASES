@@ -1,9 +1,13 @@
-import { useState, useEffect } from "react";
 import NavbarComp from "../Components/Navbar/Navbar";
+import {useNavigate } from 'react-router-dom'
 
 
 
 const Home = () => {
+    const navigate = useNavigate()
+    const handleNavigationProduct = () =>  {
+        navigate("/Products")
+    }
 
     return (
         <>
@@ -16,7 +20,7 @@ const Home = () => {
                         <p>Tu tienda de confianza para plantas y soluciones inteligentes para cuidarlas.</p>
                     </header>
                     <div className="welcome-buttons">
-                        <button className="btn" onClick={() => alert('Ir a la tienda')}>
+                        <button className="btn" onClick={() => handleNavigationProduct()}>
                         🛒 Explorar Tienda
                         </button>
                         <button className="btn secondary" onClick={() => alert('Ir al detector de problemas')}>

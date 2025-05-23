@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Button, Container, Form, Nav, Navbar, NavDropdown, Text } from 'react-bootstrap';
 import iconPlanta from '../../assets/planta.png'
+import { BsCart } from 'react-icons/bs';
+import CartNavLink from "../CarNavLink";
+
 
 const NavbarComp = () => {
 
@@ -36,9 +39,7 @@ const NavbarComp = () => {
             <Nav.Link href="/products">Plantas</Nav.Link>
             <Nav.Link href="/identifyPlant">Identificar Planta</Nav.Link>
           </Nav>
-          <Nav className="ms-auto">
-            <Nav.Link href="/shooping">Carrito</Nav.Link>
-          </Nav>
+          <CartNavLink/>
           <Form className="d-flex">
             <Form.Check
               type="switch"

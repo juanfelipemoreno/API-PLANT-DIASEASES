@@ -1,10 +1,10 @@
-import { Row, Card, Col, Container, Button, Alert } from 'react-bootstrap';
+import { Container, Button } from 'react-bootstrap';
 import NavbarComp from "../Components/Navbar/Navbar";
-import { addCarList, getCarList, clearCarList, removeFromCar } from "../Utils/SendCar";
+import { addCarList, getCarList, clearCarList, removeFromCar, updateCarListItem  } from "../Utils/SendCar";
 import { useState, useEffect } from 'react';
 import PaymentDialog from '../Components/PaymentForm';
 
-const Shopping = ({ list }) => {
+const Shopping = () => {
   const [shop, setShop] = useState([]);
   const [total, setTotal] = useState(0);
   const [showPayment, setShowPayment] = useState(false);
@@ -13,43 +13,55 @@ const Shopping = ({ list }) => {
     alert('Tu compra se ha hecho correctamente.');
     clearCarList();
     setShop([]);
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
   const handleDelete = (floorShop) => {
     removeFromCar(floorShop);
     alert('La planta fue removida del carrito');
-    setShop(shop.filter(floor => floor.common_name !== floorShop.common_name));
+    window.dispatchEvent(new Event('cartUpdated'));
   };
 
-  const increaseQuantity = (item) => {
-    const updated = shop.map(floor =>
-      floor.common_name === item.common_name
-        ? { ...floor, quantity: floor.quantity + 1 }
-        : floor
-    );
-    setShop(updated);
-  };
+ const increaseQuantity = (item) => {
+  const updated = shop.map(floor =>
+    floor.common_name === item.common_name
+      ? { ...floor, quantity: floor.quantity + 1 }
+      : floor
+  );
+  setShop(updated);
+  const changedItem = updated.find(floor => floor.common_name === item.common_name);
+  updateCarListItem(changedItem); // ✅ evita duplicados
+};
 
-  const decreaseQuantity = (item) => {
-    if (item.quantity <= 1) return;
-    const updated = shop.map(floor =>
-      floor.common_name === item.common_name
-        ? { ...floor, quantity: floor.quantity - 1 }
-        : floor
-    );
-    setShop(updated);
-  };
+const decreaseQuantity = (item) => {
+  if (item.quantity <= 1) return;
+  const updated = shop.map(floor =>
+    floor.common_name === item.common_name
+      ? { ...floor, quantity: floor.quantity - 1 }
+      : floor
+  );
+  setShop(updated);
+  const changedItem = updated.find(floor => floor.common_name === item.common_name);
+  updateCarListItem(changedItem); // ✅ evita duplicados
+};
+
+  
 
   useEffect(() => {
-    setShop(getCarList());
+    const syncCart = () => {
+      const current = getCarList();
+      setShop(current);
+    };
+    syncCart();
+
+    window.addEventListener('cartUpdated', syncCart);
+    return () => {
+      window.removeEventListener('cartUpdated', syncCart);
+    };
   }, []);
 
   useEffect(() => {
-    if (shop.length > 0) {
-      setTotal(shop.reduce((acc, item) => acc + item.price * item.quantity, 0));
-    } else {
-      setTotal(0);
-    }
+    setTotal(shop.reduce((acc, item) => acc + item.price * item.quantity, 0));
   }, [shop]);
 
   return (
@@ -113,6 +125,7 @@ const Shopping = ({ list }) => {
             clearCarList();
             setShop([]);
             setShowPayment(false);
+            window.dispatchEvent(new Event('cartUpdated'));
           }}
         />
       </Container>
