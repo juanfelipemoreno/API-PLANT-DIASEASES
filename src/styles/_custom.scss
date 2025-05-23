@@ -1,2 +1,12 @@
-$background-primary : #ff0000;
-$background-primary-hover : #880000;
+$background-primary : #388e3c;
+$background-primary-hover : #448847a1;
+
+
+$container-max-widths: (
+  sm: 620px,
+  md: 850px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+

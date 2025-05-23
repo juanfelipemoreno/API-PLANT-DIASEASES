@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { Button, Card, Modal } from 'react-bootstrap';
 import CardDetailComp from './CardDetailComp';
 import { addCarList, getCarList } from '../Utils/SendCar';
+import { AlertMessage } from './ErrorComp';
 
-function CardComp({ image = 'holder.js/100px180', title = 'img', description = '', price = 0}) {
+function CardComp({ image = 'holder.js/100px180', title = 'img', description = '', price = 0 }) {
 
 
     const [modalShow, setModalShow] = useState(false);
+    const [error, setError] = useState({ message: '', type: '' });
 
     const handleDetail = (e) => {
         setModalShow(true)
@@ -20,11 +22,13 @@ function CardComp({ image = 'holder.js/100px180', title = 'img', description = '
             "price": price
         }
         addCarList(floor);
-        alert('!Planta añadida al carrito exitosamente!')
-        console.log("Productos añadidos", getCarList())
+        setError({ message: '!Planta añadida al carrito exitosamente!', type: 'success' });
     }
 
     return (
+        <>
+        {error.message ? (<AlertMessage type={error.type} message={error.message} />) : (<div></div>)}
+        
         <Card style={{ width: '300px', Height: '400px', minHeight: '400px', display: 'inline-table' }}
             className='shadow-lg card-hover'>
             <Card.Img
@@ -36,23 +40,22 @@ function CardComp({ image = 'holder.js/100px180', title = 'img', description = '
             <Card.Body>
                 <Card.Title><b>{title}</b></Card.Title>
                 <Card.Text className="truncate-text">{description} </Card.Text>
-                 <Card.Text className="truncate-text">Precio: ${price} </Card.Text>
-                <Button variant="primary" onClick={handleDetail} className="me-2">
-                    Detalles
-                </Button>
-                <Button variant="primary" onClick={handleAddFloorToList}>
-                    Añadir al carrito
-                </Button>
+                <Card.Text className="truncate-text">Precio: ${price} </Card.Text>
+                <div className=''>
+                    <button className="me-2 mb-2 btn-b" title="Detalles del producto" onClick={handleDetail}>Detalles</button>
+                    <button className="me-2 mb-2 btn-b" title="Añadir producto" onClick={handleAddFloorToList}>Añadir al carrito</button>
+                </div>
                 <CardDetailComp
                     show={modalShow}
                     onHide={() => setModalShow(false)}
                     image={image}
                     title={title}
                     description={description}
-                    price = {price}
+                    price={price}
                 />
             </Card.Body>
         </Card>
+        </>
     );
 }
 

@@ -1,19 +1,49 @@
-@mixin btn-style($bg-color: #388e3c, $font-size: 1.4rem, $color: white,$hover-color: darken(#388e3c, 10%)) {
-  padding: 12px 24px;
-  margin: 10px;
-  font-size: $font-size;
-  border: none;
-  border-radius: 8px;
+@mixin btn-style($bg-color: #388e3c, $font-size: 1.4rem, $color: white,$hover-color: #388e3c, $margin : 10px) {
+  padding: 12px 24px !important;
+  margin: $margin !important;
+  font-size: $font-size !important;
+  border: none !important;
+  border-radius: 8px !important;
   cursor: pointer;
   background-color: $bg-color;
   color: $color;
   transition: background-color 0.3s ease;
   &:hover {
-        background-color: $hover-color;
+        background-color: darken($hover-color, 10%) !important;
     }
 }
 
 @mixin center-div{
     display: grid;
-    place-items: center;
+    place-items: center !important;
+}
+
+@media (min-width: 300px) {
+  .modal-xl {
+    --bs-modal-width: 335px !important;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal-xl {
+    --bs-modal-width: 600px !important;
+  }
+}
+
+@media (min-width: 700px) {
+  .modal-xl {
+    --bs-modal-width: 700px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    --bs-modal-width: 850px !important;
+  }
+}
+
+@media (min-width: 1300px) {
+  .modal-xl {
+    --bs-modal-width: 1000px !important;
+  }
 }

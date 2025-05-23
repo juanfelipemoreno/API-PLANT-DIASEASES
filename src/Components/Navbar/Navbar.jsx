@@ -39,7 +39,7 @@ const NavbarComp = () => {
             <Nav.Link onClick={() => navigate('/IdentifyPlant')}>Identificar Planta</Nav.Link>
           </Nav>
           <Nav className="ms-auto">
-            <Nav.Link href="/shooping">Carrito</Nav.Link>
+            <Nav.Link href="/shooping"><i className="bi bi-cart"></i>Carrito</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Check
