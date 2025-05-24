@@ -11,7 +11,7 @@ const Products = () => {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState({ message: '', type: '' });
-
+    const [uploadProgress, setUploadProgress] = useState(0);
     const [floors, setFloors] = useState(null);
 
     const token = "sk-WREH68268bcbdc5f710454"
@@ -25,6 +25,7 @@ const Products = () => {
             setFloors(response.data);
 
         }).catch(error => {
+            setUploadProgress(0);
             setLoading(false);
             setError({ message: error.message, type: 'danger' });
             console.error('Error al obtener los datos:', error.message);
@@ -39,7 +40,7 @@ const Products = () => {
         console.log("Descripcion 1:", descriptions[1].description);
 
         const timer = setTimeout(() => {
-
+            setUploadProgress(100)
             setLoading(false);
         }, 1000);
 
@@ -51,7 +52,7 @@ const Products = () => {
         <>
             <NavbarComp />
             {error.message ? (<AlertMessage type={error.type} message={error.message} />) : (<div></div>)}
-            {loading ? (<div className="text-center"><LoadComp /></div>) : (
+            {loading ? (<div className="text-center w-100 vh-100 container-center"><LoadComp percent = {uploadProgress}/></div>) : (
                 <>
                     <Container className="my-4">
                         <Row>

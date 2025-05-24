@@ -103,9 +103,11 @@
             position: relative;
             padding: 1rem;
             max-width: 15rem;
+            @include mix.center-div;
+            overflow: hidden;
             .img{
                 overflow: hidden;
-                max-width: 100%;
+                max-width: 97%;
                 max-height: 13rem;
             }
             img{
@@ -120,7 +122,7 @@
                 top:0;
                 right: 0;
                 position: absolute;
-                padding: 8px;
+                padding: 4px;
                 cursor: pointer;
                 transition: transform 0.2s ease-in-out;
                 &:hover{
@@ -130,6 +132,10 @@
             &:hover{
                 box-shadow: -1px 1px 7px black inset;
                 border-radius: 10px;
+            }
+            .text-name-plan{
+                width: 100%;
+                display: grid;
             }
         }
         .container-upload{
@@ -152,6 +158,14 @@
 
 .btn-t{
     @include mix.btn-style;
+}
+
+.container-center{
+    @include mix.center-div
+}
+
+.btn-d{
+    @include mix.btn-style(default,1rem,#388e3c,darken(#388e3c, 10%),white);    
 }
 
 

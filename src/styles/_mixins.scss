@@ -1,4 +1,4 @@
-@mixin btn-style($bg-color: #388e3c, $font-size: 1.4rem, $color: white,$hover-color: darken(#388e3c, 10%)) {
+@mixin btn-style($bg-color: #388e3c, $font-size: 1.4rem, $color: white,$hover-background: darken(#388e3c, 10%), $hover-color : white) {
   padding: 12px 24px;
   margin: 10px;
   font-size: $font-size;
@@ -9,7 +9,8 @@
   color: $color;
   transition: background-color 0.3s ease;
   &:hover {
-        background-color: $hover-color;
+        background-color: $hover-background;
+        color: $hover-color;
     }
 }
 
