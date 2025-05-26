@@ -4,6 +4,7 @@ import { Button, Container, Form, Nav, Navbar, NavDropdown, Text } from 'react-b
 import iconPlanta from '../../assets/planta.png'
 import { BsCart } from 'react-icons/bs';
 import CartNavLink from "../CartNavLink";
+import { ShoppingComp } from "../ShoppingComp";
 
 
 const NavbarComp = () => {
@@ -37,11 +38,10 @@ const NavbarComp = () => {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Nav.Link onClick={() => navigate('/')}>Inicio</Nav.Link>
             <Nav.Link onClick={() => navigate('/Products')}>Plantas</Nav.Link>
             <Nav.Link onClick={() => navigate('/IdentifyPlant')}>Identificar Planta</Nav.Link>
           </Nav>
-          <CartNavLink />
+          <ShoppingComp/>
           <Form className="d-flex">
             <Form.Check
               type="switch"

@@ -7,6 +7,7 @@ import { Row, Form, Col, Container, Button } from 'react-bootstrap';
 import LoadComp from "../Components/LoadComp";
 import {descriptions} from '../constants/constants';
 import SearchComp from "../Components/SearchComp";
+import { data } from "../constants/data";
 
 const Products = () => {
 
@@ -20,10 +21,13 @@ const Products = () => {
     const [typeFilter, setTypeFilter] = useState(null);
     const [filter, setfilter] = useState(null);
 
-    const token = "sk-ldvt682e9e0c28ed110580"
+    const token = "sk-slIw683153541e2f510580"
+    /*
+    //setFloors(data);
     const search = () => {
+        
         getDataApi({
-            url: `https://perenual.com/api/v2/species-list?key=${token}&hardiness=1-13`,
+            url: `https://perenual.com/api/species-list?key=${token}&hardiness=1-13`,
             method: 'GET',
         }).then(response => {
             setError('');
@@ -37,14 +41,15 @@ const Products = () => {
             setError({ message: error.message, type: 'danger' });
             console.error('Error al obtener los datos:', error.message);
         });
-    };
+    };*/
 
     useEffect(() => {
         setLoading(true);
         setFloors('');
         setFloorsR('');
-        search();
-
+       // search();
+        setFloors(data);
+        setFloorsR(data);
         const timer = setTimeout(() => {
             setLoading(false);
             setUploadProgress(100)
@@ -55,26 +60,33 @@ const Products = () => {
     }, []);
 
     useEffect(() => {
-        console.log(floors)
-    }, [floors]);
+        console.log(floorsR)
+    }, [floorsR]);
 
     useEffect(() => {
+        console.log(filter)
         let daresultados = '';
         if(filter != undefined && floors != undefined && Array.isArray(floors)){
             if(typeFilter == 1){
                 daresultados = floors?.filter(item =>
                     item.common_name?.toLowerCase().startsWith(filter.toLowerCase())
                 );
-            }else{
+            }else if(typeFilter == 2){
                 daresultados = floors?.filter(item =>
                     item.common_name?.toLowerCase().includes(filter.toLowerCase())
                 );
+            }else{
+                daresultados = floors;    
             }
+        }else{
+            daresultados = floors;
         }
-        console.log(daresultados)
+        console.log(floors)
+        console.log(floors)
         setFloorsR(daresultados);
+       
 
-    }, [filter,typeFilter]);
+    }, [filter,typeFilter,floors]);
 
     return (
         <>

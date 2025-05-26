@@ -28,7 +28,7 @@ const SuggestionsCarComp = ({ plant }) => {
             </div>
             <div>
                 <h5 className=" mx-3 mb-1 fs-6 text-start text-muted small mb-1">{plant.name.toUpperCase()}</h5>
-                <hr className="m-0"/>
+                <hr className="m-1"/>
                 <div className="d-flex gap-3">
                     <button className="btn-d" onClick={handleDetail} > ℹ️ Detalles Imagen</button>
                 </div>

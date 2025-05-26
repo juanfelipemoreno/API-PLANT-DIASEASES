@@ -24,8 +24,8 @@ function CartNavLink() {
 
   return (
     <Nav className="ms-auto" style={{ position: 'relative' }}>
-      <Nav.Link href="/shooping" style={{ position: 'relative', padding: 0, marginRight: 30}}>
-        <BsCart style={{ width: '50px', height: '30px' }} />
+      <div style={{ position: 'relative', padding: 0, marginRight: 30}}>
+        <BsCart style={{ width: '50px', height: '30px', color: 'white' }} />
         {itemCount > 0 && (
           <Badge
             bg="danger"
@@ -40,7 +40,7 @@ function CartNavLink() {
             {itemCount}
           </Badge>
         )}
-      </Nav.Link>
+      </div>
     </Nav>
   );
 }

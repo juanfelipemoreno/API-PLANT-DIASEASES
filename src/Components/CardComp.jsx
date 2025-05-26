@@ -39,11 +39,11 @@ function CardComp({ image = 'holder.js/100px180', title = 'img', description = '
             />
             <Card.Body>
                 <Card.Title><b>{title}</b></Card.Title>
-                <Card.Text className="truncate-text">{description} </Card.Text>
-                <Card.Text className="truncate-text">Precio: ${price} </Card.Text>
-                <div className=''>
-                    <button className="me-2 mb-2 btn-b" title="Detalles del producto" onClick={handleDetail}>Detalles</button>
-                    <button className="me-2 mb-2 btn-b" title="Añadir producto" onClick={handleAddFloorToList}>Añadir al carrito</button>
+                <Card.Text className="truncate-text font-serif">{description} </Card.Text>
+                <Card.Text className="truncate-text font-serif">Precio: ${price} </Card.Text>
+                <div style={{display: 'block ruby'}}>
+                    <button className="me-2 mb-2 btn-b font-serif" title="Detalles del producto" onClick={handleDetail}>Detalles</button>
+                    <button className="me-2 mb-2 btn-b font-serif" title="Añadir producto" onClick={handleAddFloorToList}>Añadir al carrito</button>
                 </div>
                 <CardDetailComp
                     show={modalShow}

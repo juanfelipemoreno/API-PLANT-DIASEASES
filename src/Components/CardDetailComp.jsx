@@ -43,7 +43,7 @@ export default function CardDetailComp({ show, onHide, image, title, description
         centered
       >
         <Modal.Header closeButton className='background-primary'>
-          <Modal.Title id="contained-modal-title-vcenter" className="text-white fst-italic" ><b>{title}</b></Modal.Title>
+          <Modal.Title id="contained-modal-title-vcenter" className="text-d fst-italic" ><b>{title}</b></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="container-fluid">
@@ -57,8 +57,8 @@ export default function CardDetailComp({ show, onHide, image, title, description
                 />
               </div>
               <div className="col-md-6">
-                <p className="text-justify">{description}</p>
-                <p><b>Precio: $</b>{price.toLocaleString()}</p>
+                <p className="text-justify font-serif">{description}</p>
+                <p className="font-serif"><b className="font-serif">Precio: $</b>{price.toLocaleString()}</p>
 
                 <div className="d-flex gap-3 p-2 ">
                   <InputGroup style={{ maxWidth: '150px' }}>
@@ -72,8 +72,8 @@ export default function CardDetailComp({ show, onHide, image, title, description
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={handleAddFloorToList} className='btn-b fs-2'>Añadir al carrito</Button>
-          <Button variant="secondary" onClick={onHide}>Cerrar</Button>
+          <Button onClick={handleAddFloorToList} className='btn-b fs-3 font-serif'>Añadir al carrito</Button>
+          <Button variant="secondary"className="font-serif" onClick={onHide}>Cerrar</Button>
         </Modal.Footer>
       </Modal>
     </div>
