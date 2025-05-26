@@ -27,30 +27,31 @@ const Shopping = ({ list }) => {
   return (
     <>
       <NavbarComp />
-      <Container className="my-4">
+      <Container style={{marginBlock: '4rem'}}>
         <h3 className="mb-4">Carrito de Compras</h3>
 
         {shop.length > 0 ? (
-          <div className="cart-list">
+          <div className="cart-list container-center">
             {shop.map((data, index) => (
               <div
                 key={index}
-                className="cart-item d-flex align-items-center justify-content-between p-3 mb-3 border rounded shadow-sm"
+                className="cart-item d-flex align-items-center justify-content-between p-3 mb-3 border rounded shadow-sm " 
+                style={{minWidth:'45rem'}}
               >
-                <div className="d-flex align-items-center" style={{ gap: '1rem', flex: 1 }}>
+                <div className="d-flex align-items-center font-serif" style={{ gap: '1rem', flex: 1 }}>
                   <img
                     src={data.image || 'https://via.placeholder.com/100x100?text=Sin+imagen'}
                     alt={data.common_name}
                     style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }}
                   />
                   <div className="d-flex flex-column" style={{alignItems : 'flex-start'}}>
-                    <strong>{data.common_name}</strong>
-                    <span>Precio: ${data.price}</span>
-                    <span>Cantidad: {data.quantity}</span>
+                    <strong className='fs-4'>{data.common_name}</strong>
+                    <span className='font-serif'><strong className='font-serif'>Precio:</strong> ${data.price}</span>
+                    <span className='font-serif'><strong className='font-serif'>Cantidad:</strong> {data.quantity}</span>
                   </div>
                 </div>
 
-                <Button variant="outline-danger" onClick={() => handleDelete(data)}>Eliminar</Button>
+                <Button variant="danger" onClick={() => handleDelete(data)} style={{marginInline: '3rem'}}>Eliminar</Button>
               </div>
             ))}
           </div>
@@ -61,8 +62,8 @@ const Shopping = ({ list }) => {
 
         <hr className="my-4" />
 
-        <div className="d-flex justify-content-between align-items-center">
-          <h5>Total: ${shop.reduce((acc, curr) => acc + curr.price * curr.quantity, 0).toFixed(2)}</h5>
+        <div className="d-flex justify-content-between align-items-center container-center font-serif" style={{marginInline: '20rem'}}>
+          <h5 className='font-serif'>Total: ${shop.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)}</h5>
           <Button
             variant="primary"
             onClick={handleClearShop}
