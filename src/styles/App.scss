@@ -58,7 +58,7 @@
         min-height: 2.5rem;
         border: 4px solid cornsilk;
         border-radius: 7px;
-        background-color: #5678EF;
+        background-color: vars.$background-primary ;
         align-items: center;
         justify-content: center;
         user-select: none;
@@ -105,6 +105,8 @@
             max-width: 15rem;
             @include mix.center-div;
             overflow: hidden;
+            box-shadow: -1px 1px 7px black inset;
+            border-radius: 10px;
             .img{
                 overflow: hidden;
                 max-width: 97%;

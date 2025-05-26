@@ -42,7 +42,7 @@ const Products = () => {
         const timer = setTimeout(() => {
             setUploadProgress(100)
             setLoading(false);
-        }, 1000);
+        }, 1500);
 
         return () => clearTimeout(timer); // Limpiar el temporizador
 
